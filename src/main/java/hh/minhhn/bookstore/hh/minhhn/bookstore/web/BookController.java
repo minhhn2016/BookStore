@@ -2,6 +2,7 @@ package hh.minhhn.bookstore.hh.minhhn.bookstore.web;
 
 import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.Book;
 import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.BookRepository;
+import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,10 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private BookRepository repository;
+    private BookRepository bookRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public void doSomething() {
 
@@ -25,31 +29,32 @@ public class BookController {
     @RequestMapping(value = "/booklist")
     public String booklist(Model model) {
         List<Book> bookList = new ArrayList<Book>();
-        model.addAttribute("booklist", repository.findAll());
+        model.addAttribute("booklist", bookRepository.findAll());
         return "booklist";
     }
 
     @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveBook(Book book) {
-        repository.save(book);
+        bookRepository.save(book);
         return "redirect:booklist";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long id, Model model) {
-        repository.delete(id);
+        bookRepository.delete(id);
         return "redirect:../booklist";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("book", repository.findOne(id));
+        model.addAttribute("book", bookRepository.findOne(id));
         return "editbook";
     }
 

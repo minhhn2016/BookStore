@@ -1,5 +1,7 @@
 package hh.minhhn.bookstore;
 
+import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.Category;
+import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
 
+import javax.transaction.Transactional;
+
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -20,17 +24,30 @@ public class BookstoreApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(BookRepository repository) {
+    public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository categoryRepository) {
         return (args) -> {
-            repository.save(new Book("Deep Work", "Cal Newport", 2016, "1455586692", 16.90));
-            repository.save(new Book("So Good They Can't Ignore You", "Cal Newport", 2012, "1455509124", 14.70));
+            categoryRepository.save(new Category("Productivity"));
+            categoryRepository.save(new Category("Non-fiction"));
+            categoryRepository.save(new Category("Fiction"));
+            categoryRepository.save(new Category("Sci-Fi"));
+            categoryRepository.save(new Category("Business"));
 
-            for (Book book : repository.findAll()
+            //bookRepository.save(new Book("Deep Work", "Cal Newport", 2016, "1455586692",16.90, categoryRepository.findByCategoryName("Productivity").get(0) ));
+            //bookRepository.save(new Book("So Good They Can't Ignore You", "Cal Newport", 2012, "1455509124", 14.70, categoryRepository.findByCategoryName("Productivity").get(0)));
+
+            for (Book book : bookRepository.findAll()
                     ) {
                 System.out.println(book.toString());
             }
+
+            for (Category category : categoryRepository.findAll()
+                    ) {
+                System.out.println(category.toString());
+            }
         };
     }
+
+
 }
 
 
