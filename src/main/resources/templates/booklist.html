@@ -3,6 +3,9 @@
 <head>
     <title>Book List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" /-->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+
 </head>
 <body>
 <h1>Book List</h1>
@@ -24,6 +27,7 @@
         <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
     </tr>
 </table>
-<button ><a class="btn btn-success" href="/addbook">Add Book</a></button>
+<a class="btn btn-success" href="/addbook">Add Book</a>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

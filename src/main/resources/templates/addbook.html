@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" />
     <title>Add a new book</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
         <input type="text" id="price" th:field="*{price}"/>
         <input type="submit" value="Save"/>
     </form>
-    <button><a href="/booklist">Show Books</a></button>
+    <a class="btn btn-success" href="/booklist">Show Books</a>
 </div>
 </body>
 </html>
