@@ -32,8 +32,8 @@ public class BookstoreApplication {
             categoryRepository.save(new Category("Sci-Fi"));
             categoryRepository.save(new Category("Business"));
 
-            //bookRepository.save(new Book("Deep Work", "Cal Newport", 2016, "1455586692",16.90, categoryRepository.findByCategoryName("Productivity").get(0) ));
-            //bookRepository.save(new Book("So Good They Can't Ignore You", "Cal Newport", 2012, "1455509124", 14.70, categoryRepository.findByCategoryName("Productivity").get(0)));
+            bookRepository.save(new Book("Deep Work", "Cal Newport", 2016, "1455586692",16.90, categoryRepository.findByCategoryName("Productivity").get(0) ));
+            bookRepository.save(new Book("So Good They Can't Ignore You", "Cal Newport", 2012, "1455509124", 14.70, categoryRepository.findByCategoryName("Productivity").get(0)));
 
             for (Book book : bookRepository.findAll()
                     ) {

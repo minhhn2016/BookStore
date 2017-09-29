@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,18 @@ public class BookController {
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("book", bookRepository.findOne(id));
         return "editbook";
+    }
+
+    // RESTful service to get all books
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public @ResponseBody List<Book> bookListRest() {
+        return (List<Book>) bookRepository.findAll();
+    }
+
+    // RESTful service to get student by id
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    public @ResponseBody Book findBookRest(@PathVariable("id") Long bookId) {
+        return (Book) bookRepository.findOne(bookId);
     }
 
 }
