@@ -4,6 +4,7 @@ import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.Book;
 import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.BookRepository;
 import hh.minhhn.bookstore.hh.minhhn.bookstore.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class BookController {
         return "booklist";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/addbook")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
@@ -56,6 +58,7 @@ public class BookController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("book", bookRepository.findOne(id));
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editbook";
     }
 
@@ -71,4 +74,7 @@ public class BookController {
         return (Book) bookRepository.findOne(bookId);
     }
 
+    // Login
+    @RequestMapping(value = "/login")
+    public String login() { return "login"; }
 }
