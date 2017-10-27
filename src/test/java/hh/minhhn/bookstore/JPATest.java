@@ -33,7 +33,7 @@ public class JPATest {
 
     @Test
     public void createNewBook() {
-        Book book = new Book("abc","def",2000,"123456789",0.00, categoryRepository.findByCategoryName("Fiction").get(0));
+        Book book = new Book("abc", "def", 2000, "123456789", 0.00, categoryRepository.findByCategoryName("Fiction").get(0));
         bookRepository.save(book);
         assertThat(book.getId()).isNotNull();
     }
@@ -45,14 +45,12 @@ public class JPATest {
         assertThat(bookRepository.findByTitle("Deep Work")).hasSize(0);
     }
 
-
     @Test
     public void findByCategoryNameShouldReturnCategory() {
         List<Category> categories = categoryRepository.findByCategoryName("Productivity");
         assertThat(categories).hasSize(1);
         assertThat(categories.get(0).getCategoryName()).isEqualTo("Productivity");
     }
-
 
 
     @Test
