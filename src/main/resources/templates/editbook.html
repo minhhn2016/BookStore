@@ -3,12 +3,12 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" th:href="@{/css/bootstrap.css}" />
     <title>Edit a book</title>
 </head>
 <body>
 <h1>Edit book</h1>
-<div>
+<div  class="md-col-12">
     <form th:object="${book}" th:action="@{../save}" action="#" method="post">
         <input type="hidden" id="id" th:field="*{id}"/>
         <label for="title">Title</label>
